@@ -24,7 +24,7 @@ class Server {
 
   async dbConnetion() {
     await connection.authenticate();
-    //await connection.sync({ force: true });
+    await connection.sync({ alter: true });
     console.log("Database connected");
   }
 

@@ -23,6 +23,13 @@ const Todo = connection_1.default.define("todo", {
         type: sequelize_1.DataTypes.TINYINT,
         defaultValue: 0,
     },
+    userId: {
+        type: sequelize_1.DataTypes.UUID,
+        allowNull: false,
+        validate: {
+            isUUID: 4,
+        },
+    },
 }, { timestamps: false });
 exports.default = Todo;
 //# sourceMappingURL=todo.js.map

@@ -55,7 +55,7 @@ class Server {
     dbConnetion() {
         return __awaiter(this, void 0, void 0, function* () {
             yield connection_1.default.authenticate();
-            //await connection.sync({ force: true });
+            yield connection_1.default.sync({ alter: true });
             console.log("Database connected");
         });
     }

@@ -21,6 +21,13 @@ const Todo = connection.define(
       type: DataTypes.TINYINT,
       defaultValue: 0,
     },
+    userId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        isUUID: 4,
+      },
+    },
   },
   { timestamps: false }
 );
