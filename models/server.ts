@@ -1,7 +1,9 @@
-import express, { Application } from "express";
+import express, { Application, urlencoded } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connection from "../db/connection";
 import associations from "../db/associations";
+import router from "../routes/index.routes";
 
 class Server {
   private app: Application;
@@ -15,12 +17,22 @@ class Server {
     //DB Connection
     this.dbConnetion();
     associations();
+
+    //Middlewares
+    this.middlewares();
   }
 
   async dbConnetion() {
     await connection.authenticate();
-    await connection.sync({ alter: true });
+    //await connection.sync({ force: true });
     console.log("Database connected");
+  }
+
+  middlewares() {
+    this.app.use(cors());
+    this.app.use(express.json());
+    this.app.use(urlencoded({ extended: true }));
+    this.app.use(router);
   }
 
   listen() {

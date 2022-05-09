@@ -17,6 +17,9 @@ const User = connection.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isEmail: true,
+      },
       unique: true,
     },
     password: {
@@ -26,6 +29,10 @@ const User = connection.define(
     avatar: {
       type: DataTypes.STRING,
       defaultValue: "avatar.jpg",
+    },
+    role: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
   },
   {

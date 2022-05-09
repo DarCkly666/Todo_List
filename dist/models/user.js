@@ -19,6 +19,9 @@ const User = connection_1.default.define("user", {
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+        validate: {
+            isEmail: true,
+        },
         unique: true,
     },
     password: {
@@ -28,6 +31,10 @@ const User = connection_1.default.define("user", {
     avatar: {
         type: sequelize_1.DataTypes.STRING,
         defaultValue: "avatar.jpg",
+    },
+    role: {
+        type: sequelize_1.DataTypes.INTEGER,
+        defaultValue: 0,
     },
 }, {
     indexes: [
