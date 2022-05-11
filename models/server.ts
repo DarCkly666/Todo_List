@@ -4,6 +4,7 @@ import cors from "cors";
 import connection from "../db/connection";
 import associations from "../db/associations";
 import router from "../routes/index.routes";
+import path from "path";
 
 class Server {
   private app: Application;
@@ -24,7 +25,7 @@ class Server {
 
   async dbConnetion() {
     await connection.authenticate();
-    await connection.sync({ alter: true });
+    //await connection.sync({ alter: true });
     console.log("Database connected");
   }
 
@@ -33,6 +34,7 @@ class Server {
     this.app.use(express.json());
     this.app.use(urlencoded({ extended: true }));
     this.app.use(router);
+    this.app.use("/", express.static(path.join(__dirname, "../public")));
   }
 
   listen() {

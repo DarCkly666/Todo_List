@@ -41,6 +41,7 @@ const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("../db/connection"));
 const associations_1 = __importDefault(require("../db/associations"));
 const index_routes_1 = __importDefault(require("../routes/index.routes"));
+const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
         dotenv_1.default.config();
@@ -55,7 +56,7 @@ class Server {
     dbConnetion() {
         return __awaiter(this, void 0, void 0, function* () {
             yield connection_1.default.authenticate();
-            yield connection_1.default.sync({ alter: true });
+            //await connection.sync({ alter: true });
             console.log("Database connected");
         });
     }
@@ -64,6 +65,7 @@ class Server {
         this.app.use(express_1.default.json());
         this.app.use((0, express_1.urlencoded)({ extended: true }));
         this.app.use(index_routes_1.default);
+        this.app.use("/", express_1.default.static(path_1.default.join(__dirname, "../public")));
     }
     listen() {
         this.app.listen(this.port, () => {
